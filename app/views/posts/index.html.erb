@@ -18,7 +18,23 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= image_tag "#{post.image_url}", style: 'height:70px; width:70px;' %></td>
-        <td><%= post.content %></td>
+        <td> <% if post.user != nil%>
+              <%c = post.content%>
+              <% d = " "%>
+              <% e = post.user.to_s%>
+              <% arr = c.split(d)%> 
+              <%arr.each do |arr|%>
+                <% if arr.include?(e)%>
+                  <% arr = ' ' %>
+                  <%= print%><span><%=arr%></span>
+                <% else%>
+                  <%= print%><span><%=arr%></span>
+                <%end%>
+              <%end%>
+            <%else%>
+              <%= post.content%>
+            <%end%>
+        </td>
         <td><%= post.created_at %></td>
       </tr>
     <% end %>
