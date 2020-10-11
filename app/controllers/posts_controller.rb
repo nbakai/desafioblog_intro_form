@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+   
     @posts = Post.all
   end
 
@@ -30,7 +31,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post = @post.content - @post.spoiler
+    
 
     respond_to do |format|
       if @post.save
