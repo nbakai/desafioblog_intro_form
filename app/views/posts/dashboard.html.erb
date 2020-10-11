@@ -20,17 +20,15 @@
     <%= form.label :image_url %>
     <%= form.text_area :image_url %>
   </div>
-  <div class="field">
-    <%= form.label :user, 'spoiler' %>
-    <%= form.text_field :user %>
-  </div>
 
   <div class="field">
     <%= form.label :content %>
     <%= form.text_area :content %>
   </div>
-
-
+  <div class="field">
+    <%= form.label :spoiler %>
+    <%= form.text_field :spoiler %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
