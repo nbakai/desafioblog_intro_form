@@ -1,22 +1,14 @@
- <%= form_with model: @post, local: true, url: posts_dash_create_path do |form| %>
+ <form action="/posts/dashboard" accept-charset="UTF-8" method="post" id="create_posts" local="true">
 
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image_url %>
-    <%= form.text_area :image_url %>
-  </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <label for="title">Título</label>
+    <input type="text" name="post[title]" id="post_title">
+    <label for="image_url">Imagen(url)</label>
+    <input type="text" name="post[image_url]" id="post_image_url">
+    <label for="content">Contenido</label>
+    <input type="text_area" name="post[content]" id="post_content"> <br>
+    <label for="spoiler">spoiler</label>
+    <input type="text_area" name="post[spoiler]" id="post_spoiler"> <br>
+    <input type="submit" value="Enviar" >
+   
+</form>

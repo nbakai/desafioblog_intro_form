@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  protect_from_forgery with: :null_session, only: [:create]
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   http_basic_authenticate_with name: "desafiovamoscontodo", password: "XAHTJEAS23123%23", only: :dashboard 
   before_action :set_post, only: [ :edit, :update, :destroy]
@@ -29,13 +30,14 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post = @post.content - @post.spoiler
 
     respond_to do |format|
       if @post.save
         format.html { redirect_to posts_create_path, notice: 'Post fue creado exitosamente.' }
       
       else
-        format.html { render :new, alert: 'Post no pudo ser creado' }
+        format.html { redirect_to posts_create_path, notice: 'Post no pudo ser creado' }
    
       end
     end
@@ -73,6 +75,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :image_url, :content, :id)
+      params.require(:post).permit(:title, :image_url, :content, :id, :search)
     end
 end
