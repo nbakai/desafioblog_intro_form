@@ -1,14 +1,37 @@
- <form action="/posts/dashboard" accept-charset="UTF-8" method="post" id="create_posts" local="true">
+<%= form_with(model: @post,url: posts_dash_create_path, method: :post, local: true, html: id="create_posts") do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
+      <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-    <label for="title">Título</label>
-    <input type="text" name="post[title]" id="post_title">
-    <label for="image_url">Imagen(url)</label>
-    <input type="text" name="post[image_url]" id="post_image_url">
-    <label for="content">spoiler</label>
-    <input type="text_area" name="post[content]" id="post_content"> <br>
-    <label for="content">Contenido</label>
-    <input type="text_area" name="post[content]" id="post_content"><br>
-    <input type="submit" value="Enviar" >
-   
-</form>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image_url %>
+    <%= form.text_area :image_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user %>
+    <%= form.text_field :user %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

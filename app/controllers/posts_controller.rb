@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  protect_from_forgery with: :null_session, only: [:create]
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   http_basic_authenticate_with name: "desafiovamoscontodo", password: "XAHTJEAS23123%23", only: :dashboard 
+  #protect_from_forgery with: :null_session
   before_action :set_post, only: [ :edit, :update, :destroy]
 
   # GET /posts
@@ -35,10 +35,13 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to posts_create_path, notice: 'Post fue creado exitosamente.' }
+        format.html { flash[:notice] = 'Post fue creado exitosamente.' 
+          redirect_to posts_create_path
+        }
       
       else
-        format.html { redirect_to posts_create_path, notice: 'Post no pudo ser creado' }
+        format.html { flash[:notice] = 'Post no pudo ser creado'
+           redirect_to posts_create_path}
    
       end
     end
